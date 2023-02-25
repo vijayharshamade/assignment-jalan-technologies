@@ -1,0 +1,67 @@
+class VendingMachine{
+    constructor(){
+        this.products = [
+            {name:"Coke",price:25},
+            {name:"Pepsi",price:35},
+            {name:"Soda",price:45}
+            ]
+    }
+    displayWelcomeMessagge(){
+        console.log("Hello Customer Welcome to Vending Machine")
+        console.log("Please Select The Product From Below")
+        const lengthOfArray = this.products.length
+        for (let index=0;index<lengthOfArray;index++){
+          console.log(`${this.products[index].name} - ₹ ${this.products[index].price}`)
+        }
+    }
+    selectProduct(){
+        let product = prompt('Select The Product : Coke, Pepsi,  Soda')
+        product = product[0].toUpperCase() + product.slice(1,product.length)
+        console.log(`Selected Product - ${product}`)
+        return product
+    }
+    calculateBill(selectedProduct){
+        let price
+        this.products.forEach((each)=> {
+            if(each.name===selectedProduct){
+                price = each.price
+                console.log(`Your Bill - ₹${price}`)
+            }
+        })
+        return price
+    }
+    getCoinsArray(){
+        let coinsArray = []
+        coinsArray.push(parseInt(prompt('Enter 1 rupee Coin ')))
+        coinsArray.push(parseInt(prompt('Enter 2 rupee Coin ')))
+        coinsArray.push(parseInt(prompt('Enter 5 rupee Coin ')))
+        coinsArray.push(parseInt(prompt('Enter 10 rupee Coin ')))
+        let enteredValue = 0 
+        enteredValue = enteredValue + coinsArray[0]*1
+        enteredValue = enteredValue + coinsArray[1]*2 
+        enteredValue = enteredValue + coinsArray[2]*5
+        enteredValue = enteredValue + coinsArray[3]*10 
+        console.log(`Total Value of Coins Entered - ₹${enteredValue}`)
+        return enteredValue
+    }
+    returnChange(enteredValue,bill){
+        let change = enteredValue - bill 
+        //console.log(change)
+        if (change<0){
+            console.log("Please Enter Required Amount Of Coins")
+        }
+        else{
+            console.log(`Please Take Your Change - ₹${change}` )
+        }
+    }
+    renderAllFunctions(){
+        this.displayWelcomeMessagge()
+        let selectedProduct = this.selectProduct()
+        let bill = this.calculateBill(selectedProduct)
+        let enteredValue = this.getCoinsArray()
+        this.returnChange(enteredValue,bill)
+    }
+}
+
+let productObject = new VendingMachine()
+productObject.renderAllFunctions()
