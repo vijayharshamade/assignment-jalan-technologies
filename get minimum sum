@@ -1,0 +1,39 @@
+function getMinimumSum(array,j,n){
+    const firstJItems = array.slice(0,j)
+    const sumOfFirstJItems = firstJItems.reduce((previous,current)=>previous+current)
+    //console.log(sumOfFirstJItems) 
+    
+    const lastJitems = array.slice(j,n)
+    const sumOfLastJItems = lastJitems.reduce((previous,current)=>previous+current)
+    //console.log(sumOfLastJItems) 
+    
+    const combination1 = [array[0],...array.slice(j+1,n)] 
+    const sumOfCombination1 = combination1.reduce((previous,current)=>previous+current)
+    //console.log(sumOfCombination1)
+    
+    const combination2 = [...array.slice(0,j-1),array[n-1]]
+    const sumOfCombination2 = combination2.reduce((previous,current)=>previous+current)
+    //console.log(sumOfCombination2)
+    
+    const cornorItemsSum = [sumOfFirstJItems ,sumOfLastJItems, sumOfCombination1,sumOfCombination2]
+    const minimumSumValue = Math.min(...cornorItemsSum)
+    console.log(minimumSumValue)
+}
+
+const array = [6, 2, 1, 4, 8, 3]
+const j = 3
+const n = array.length
+
+getMinimumSum(array,j,n)
+
+// Test Case - 1 
+//const array = [0,1,2,55,45,65,25]
+//const j = 2
+//const n = array.length
+// OUTPUT = 1
+
+// TEST CASE - 2
+//const array = [25,10,6,4,2,5,6,4,5,2]
+//const j = 5
+//const n = array.length
+// OUTPUT = 22
